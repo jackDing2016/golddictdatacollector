@@ -2,12 +2,20 @@ package com.jack.model.question;
 
 import java.util.List;
 
-public class SelectDefinition extends Question{
+public class SelectDefinition extends Question {
 
     private List<String> optionList;
 
     public SelectDefinition(String description, List<String> optionList) {
         super(description);
         this.optionList = optionList;
+    }
+
+    @Override
+    public String toString() {
+        return "SelectDefinition{" +
+                "description=" + this.getDescription() + " " +
+                "optionList=" + optionList +
+                '}';
     }
 }

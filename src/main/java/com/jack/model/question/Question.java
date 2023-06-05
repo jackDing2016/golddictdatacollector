@@ -13,6 +13,13 @@ public abstract class Question {
         return description;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "description='" + description + '\'' +
+                '}';
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

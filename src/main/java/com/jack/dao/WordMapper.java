@@ -103,4 +103,6 @@ public interface WordMapper {
 
     Word selectTest();
 
+    String getRandomWord();
+
 }

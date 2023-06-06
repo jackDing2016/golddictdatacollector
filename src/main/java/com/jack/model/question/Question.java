@@ -4,6 +4,10 @@ public abstract class Question {
 
     private String description;
 
+    private String answer;
+
+    private String solution;
+
 
     public Question(String description) {
         this.description = description;

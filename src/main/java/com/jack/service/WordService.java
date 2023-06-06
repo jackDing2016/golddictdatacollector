@@ -13,4 +13,6 @@ public interface WordService {
 
     Word selectWord(Integer id);
 
+    String getRandomWord();
+
 }

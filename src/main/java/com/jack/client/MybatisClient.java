@@ -1,5 +1,6 @@
 package com.jack.client;
 
+import com.jack.dao.DefinitionMapper;
 import com.jack.dao.WordMapper;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.ibatis.mapping.Environment;
@@ -29,7 +30,7 @@ public class MybatisClient {
         // configuration
         Configuration configuration = new Configuration(environment);
         configuration.addMapper(WordMapper.class);
-
+        configuration.addMapper(DefinitionMapper.class);
 
 
 //        configuration.addMappers("com.jack.xml");

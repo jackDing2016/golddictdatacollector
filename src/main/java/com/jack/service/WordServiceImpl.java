@@ -36,4 +36,10 @@ public class WordServiceImpl implements WordService {
 //        return wordMapper.selectWord(id);
         return wordMapper.selectTest();
     }
+
+    @Override
+    public String getRandomWord() {
+        SqlSession session = MybatisClient.getSqlSessionFactory().openSession();
+        return session.getMapper(WordMapper.class).getRandomWord();
+    }
 }

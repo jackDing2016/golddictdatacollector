@@ -14,14 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CodeGenerator {
-//    public static void main(String[] args) throws XMLParserException, IOException, SQLException, InterruptedException, InvalidConfigurationException {
-//        List<String> warnings = new ArrayList<String>();
-//        boolean overwrite = true;
-//        File configFile = new File("/home/jack/develop/java/goldendict-data-collector/src/main/resources/generator.xml");
-//        ConfigurationParser cp = new ConfigurationParser(warnings);
-//        Configuration config = cp.parseConfiguration(configFile);
-//        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-//        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-//        myBatisGenerator.generate(null);
-//    }
+    public static void main(String[] args) throws XMLParserException, IOException, SQLException, InterruptedException, InvalidConfigurationException {
+        List<String> warnings = new ArrayList<String>();
+        boolean overwrite = true;
+        File configFile = new File("/home/jack/develop/java/golddictdatacollector/src/main/resources/generator.xml");
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(configFile);
+        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        myBatisGenerator.generate(null);
+    }
 }

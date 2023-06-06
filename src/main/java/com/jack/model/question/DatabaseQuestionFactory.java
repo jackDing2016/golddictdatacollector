@@ -1,6 +1,13 @@
 package com.jack.model.question;
 
-public class DatabaseQuestionFactory implements QuestionFactory{
+import com.jack.client.MybatisClient;
+import com.jack.dao.DefinitionMapper;
+import com.jack.dao.WordMapper;
+import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
+
+public class DatabaseQuestionFactory implements QuestionFactory {
     @Override
     public Question createFillDefinition(String word) {
         return null;
@@ -8,7 +15,21 @@ public class DatabaseQuestionFactory implements QuestionFactory{
 
     @Override
     public Question createSelectDefinition(String word) {
-        return null;
+
+        // get word definition
+        SqlSession session =
+                MybatisClient.getSqlSessionFactory().openSession();
+
+        DefinitionMapper definitionMapper = session.getMapper(DefinitionMapper.class);
+        String definition = definitionMapper.getDefinitionByWord(word);
+
+        // get 3 other definition which is not relate with the word randomly
+        List<String> definitionOptions = definitionMapper.getThreeDefinitionsRandom();
+        definitionOptions.add(definition);
+
+        session.close();
+
+        return new SelectDefinition(word, definitionOptions);
     }
 
     @Override

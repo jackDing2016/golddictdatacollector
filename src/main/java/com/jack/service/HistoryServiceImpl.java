@@ -76,8 +76,14 @@ public class HistoryServiceImpl implements HistoryService {
     private List<String> chooseDataWriteFromHistory(List<String> list) {
         if (CollectionUtils.isEmpty(list)) return null;
         String pivot = getPivot();
+        /**
+         * if pivot is null (most of this case is maybe when the program start soon)
+         * we don't do write operation (because if we do write it will add all history
+         * at the beginning when starting the program ).
+         */
         if (StringUtils.isEmpty(pivot)) {
-            return list;
+//            setPivot(list.get(0));
+            return null;
         } else {
             return list.subList(0, list.indexOf(pivot));
         }
@@ -89,9 +95,9 @@ public class HistoryServiceImpl implements HistoryService {
         List<String> listForSave = chooseDataWriteFromHistory(list);
 
         // Do write
-        doWrite(listForSave);
+        if (CollectionUtils.isNotEmpty(listForSave)) doWrite(listForSave);
 
-        // refresh pivot
+        // Refresh pivot
         if (CollectionUtils.isNotEmpty(list)) setPivot(list.get(0));
     }
 

@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -121,6 +122,8 @@ public class HistoryServiceImpl implements HistoryService {
                 Word word = new Word();
                 word.setName(x);
                 word.setCount(1);
+                word.setCreateTime(LocalDateTime.now());
+                word.setUpdateTime(LocalDateTime.now());
                 wordMapper.insert(word);
             });
         } else {
@@ -134,6 +137,8 @@ public class HistoryServiceImpl implements HistoryService {
                             Word word = new Word();
                             word.setName(x);
                             word.setCount(1);
+                            word.setCreateTime(LocalDateTime.now());
+                            word.setUpdateTime(LocalDateTime.now());
                             wordMapper.insert(word);
                         }
                         // Else if data exists , update by increase count column by 1
@@ -142,6 +147,7 @@ public class HistoryServiceImpl implements HistoryService {
                             wordExample.createCriteria().andNameEqualTo(x);
                             Word word = wordMapper.selectByExample(wordExample).get(0);
                             word.setCount(word.getCount() + 1);
+                            word.setUpdateTime(LocalDateTime.now());
                             wordMapper.updateByPrimaryKey(word);
                         }
                     }

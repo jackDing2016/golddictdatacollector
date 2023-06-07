@@ -1,3 +1,5 @@
+package com.jack.service;
+
 import com.jack.service.HistoryService;
 import com.jack.service.HistoryServiceImpl;
 import org.junit.jupiter.api.Test;

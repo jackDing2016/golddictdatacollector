@@ -1,7 +1,7 @@
 package com.jack.service;
 
 import com.jack.model.question.Question;
-import com.jack.model.question.SimpleQuestionFactory;
+import com.jack.factory.SimpleQuestionFactory;
 import org.junit.jupiter.api.Test;
 
 public class SimpleQuestionFactoryTest {

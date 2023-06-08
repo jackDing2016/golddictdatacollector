@@ -3,10 +3,7 @@ package com.jack;
 import com.jack.concurrent.GoldenDictHistoryCollector;
 import com.jack.service.HistoryServiceImpl;
 
-import javax.swing.table.TableRowSorter;
-import java.util.concurrent.*;
-
-public class Test {
+public class GoldendictDataCollectorApp {
 
     public static void main(String[] args) throws Exception {
 

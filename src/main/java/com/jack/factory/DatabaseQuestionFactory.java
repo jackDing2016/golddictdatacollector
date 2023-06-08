@@ -1,8 +1,9 @@
-package com.jack.model.question;
+package com.jack.factory;
 
 import com.jack.client.MybatisClient;
 import com.jack.dao.DefinitionMapper;
-import com.jack.dao.WordMapper;
+import com.jack.model.question.Question;
+import com.jack.model.question.SelectDefinition;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;

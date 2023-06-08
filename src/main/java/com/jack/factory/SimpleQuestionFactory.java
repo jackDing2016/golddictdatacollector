@@ -1,5 +1,9 @@
-package com.jack.model.question;
+package com.jack.factory;
 
+import com.jack.model.question.FillDefinition;
+import com.jack.model.question.Question;
+import com.jack.model.question.SelectDefinition;
+import com.jack.model.question.SelectWord;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

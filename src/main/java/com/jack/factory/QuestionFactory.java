@@ -1,4 +1,6 @@
-package com.jack.model.question;
+package com.jack.factory;
+
+import com.jack.model.question.Question;
 
 public interface QuestionFactory {
 

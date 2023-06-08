@@ -1,10 +1,12 @@
 package com.jack.client;
 
+import com.jack.constatnt.Constant;
 import com.jack.dao.DefinitionMapper;
 import com.jack.dao.WordMapper;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,8 +23,21 @@ public class MybatisClient {
         // read datasource info from properties file
         Configurations configurations = new Configurations();
         org.apache.commons.configuration2.Configuration dbConfiguration = null;
+
+
+        // read program env
+        String env = System.getenv("jack_env");
+
+        String configureFile = null;
+
+        // default configure file
+        if (StringUtils.isEmpty(env)) configureFile = "database-dev.properties";
+
+        if (Constant.env_dev.equals(env)) configureFile = "database-dev.properties";
+        else configureFile = "database-prod.properties";
+
         try {
-            dbConfiguration = configurations.properties(new File("database.properties"));
+            dbConfiguration = configurations.properties(new File(configureFile));
         } catch (ConfigurationException e) {
             throw new RuntimeException();
         }

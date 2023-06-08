@@ -139,6 +139,20 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
+    <delete id="deleteByWord" parameterType="java.lang.String">
+        DELETE
+        FROM
+        tm_definition t
+        WHERE
+        t.word_id in (
+        SELECT
+        tw.id
+        from
+        tm_word tw
+        where
+        tw.name = #{word}
+        )
+    </delete>
     <insert id="insert" parameterType="com.jack.model.Definition">
         <!--
           WARNING - @mbg.generated

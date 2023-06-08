@@ -19,7 +19,7 @@ public class DefinitionServiceImplTest {
     public void fillDefinition() {
         DefinitionServiceImpl definitionService = new DefinitionServiceImpl();
         String word = "monkey";
-        String definition = "a type of animal which like human being";
+        String definition = "a type of animal which like human being again";
         definitionService.fillDefinition(word, definition);
     }
 

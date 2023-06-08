@@ -19,6 +19,10 @@ public class DefinitionServiceImpl implements DefinitionService {
         DefinitionMapper definitionMapper =
                 sqlSession.getMapper(DefinitionMapper.class);
 
+        // Now a word could only have one definition, so delete previous data first
+        definitionMapper.deleteByWord(word);
+
+        // insert
         definitionMapper.setDefinition(word, definition);
 
         sqlSession.commit();

@@ -2,7 +2,9 @@ package com.jack.dao;
 
 import com.jack.model.Definition;
 import com.jack.model.DefinitionExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface DefinitionMapper {
@@ -99,6 +101,8 @@ public interface DefinitionMapper {
 
     List<String> getThreeDefinitionsRandom();
 
-    void setDefinition(@Param("word") String word,@Param("definition") String definition);
+    void setDefinition(@Param("word") String word, @Param("definition") String definition);
+
+    void deleteByWord(@Param("word")String word);
 
 }

@@ -32,9 +32,10 @@ public class MybatisClient {
 
         // default configure file
         if (StringUtils.isEmpty(env)) configureFile = "database-dev.properties";
-
-        if (Constant.env_dev.equals(env)) configureFile = "database-dev.properties";
-        else configureFile = "database-prod.properties";
+        else {
+            if (Constant.env_dev.equals(env)) configureFile = "database-dev.properties";
+            else configureFile = "database-prod.properties";
+        }
 
         try {
             dbConfiguration = configurations.properties(new File(configureFile));

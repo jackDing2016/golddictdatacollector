@@ -4,7 +4,9 @@ import com.jack.concurrent.GoldenDictHistoryCollector;
 import com.jack.factory.RandomQuestionFactory;
 import com.jack.model.question.FillDefinition;
 import com.jack.model.question.Question;
+import com.jack.service.DefinitionServiceImpl;
 import com.jack.service.HistoryServiceImpl;
+import com.jack.service.WordServiceImpl;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -57,6 +59,20 @@ public class GoldendictQuestionApp {
                         break out;
                     }
                     System.out.println("Your answer is \"" + answer + "\". OK Then we go on to the next one.");
+                }
+            } else if ("b".equals(input)) {
+                System.out.println("Start fill definition and save it, enter exit to exit");
+                while (true) {
+                    String word = new WordServiceImpl().getRandomWord();
+                    System.out.println("Please write the definition of word \"" + word + "\"");
+                    String answer = new BufferedReader(new InputStreamReader(System.in)).readLine();
+                    if ("exit".equals(answer)) {
+                        System.out.println("Have a good day. Bye Bye");
+                        break out;
+                    }
+                    // save it
+                    new DefinitionServiceImpl().fillDefinition(word, answer);
+                    System.out.println("Saved the answer: \"" + answer + "\". OK Then we go on to the next one.");
                 }
             }
         }

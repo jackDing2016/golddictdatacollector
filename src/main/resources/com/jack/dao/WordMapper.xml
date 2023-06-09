@@ -152,7 +152,8 @@
         insert into tm_word (id, name, type,
         count, is_favorite, create_time, update_time)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
-        #{count,jdbcType=INTEGER}, #{isFavorite,jdbcType=INTEGER}, #{createTime,jdbcType=TIME}, #{updateTime,jdbcType=TIME})
+        #{count,jdbcType=INTEGER}, #{isFavorite,jdbcType=INTEGER}, #{createTime,jdbcType=TIME},
+        #{updateTime,jdbcType=TIME})
     </insert>
     <insert id="insertSelective" parameterType="com.jack.model.Word">
         <!--
@@ -219,6 +220,7 @@
         RAND()
         LIMIT 1
     </select>
+
 
     <update id="updateByExampleSelective" parameterType="map">
         <!--
@@ -301,4 +303,26 @@
         update_time = #{updateTime,jdbcType=TIME}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <resultMap id="wordVOResMap" type="com.jack.model.vo.WordVO">
+        <result property="name" column="word_name"/>
+        <association property="definitionVO" javaType="com.jack.model.vo.DefinitionVO">
+            <result property="name" column="definition_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getRandomWordVOList" resultMap="wordVOResMap">
+        SELECT
+        tw.name word_name,
+        td.name definition_name
+        FROM
+        tm_word tw
+        inner join tm_definition td on
+        tw.id = td.word_id
+        ORDER BY
+        RAND()
+        LIMIT 10
+    </select>
+
 </mapper>

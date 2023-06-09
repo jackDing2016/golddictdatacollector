@@ -15,5 +15,6 @@ public interface WordService {
 
     String getRandomWord();
 
+    void deleteByWord(String word);
 
 }

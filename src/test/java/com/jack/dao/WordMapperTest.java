@@ -2,10 +2,12 @@ package com.jack.dao;
 
 import com.jack.client.MybatisClient;
 import com.jack.model.Word;
+import com.jack.model.vo.WordVO;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class WordMapperTest {
 
@@ -35,6 +37,16 @@ public class WordMapperTest {
         wordMapper.updateByPrimaryKey(word);
         session.commit();
         session.close();
+    }
+
+    @Test
+    public void getRandomWordVOList() {
+        SqlSession session =
+                MybatisClient.getSqlSessionFactory().openSession();
+        WordMapper wordMapper = session.getMapper(WordMapper.class);
+        List<WordVO> wordVOList = wordMapper.getRandomWordVOList();
+        session.close();
+        System.out.println(wordVOList);
     }
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.jack.model.Word;
 import com.jack.model.WordExample;
-import org.apache.ibatis.annotations.Mapper;
+import com.jack.model.vo.WordVO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -104,5 +104,7 @@ public interface WordMapper {
     Word selectTest();
 
     String getRandomWord();
+
+    List<WordVO> getRandomWordVOList();
 
 }

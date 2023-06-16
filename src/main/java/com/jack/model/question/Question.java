@@ -1,6 +1,10 @@
 package com.jack.model.question;
 
-public abstract class Question {
+import com.jack.model.vo.WordVO;
+
+public abstract class Question<T extends WordVO> {
+
+    private T t;
 
     private String description;
 

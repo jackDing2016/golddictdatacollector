@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-public class RandomWordReviewServiceImpl implements WordReviewService, RandomDataService {
+public class RandomWordReviewServiceImpl implements WordReviewService<WordVO>, RandomDataService {
     @Override
     public List<WordVO> getWordVOList() {
         SqlSession sqlSession =

@@ -4,8 +4,8 @@ import com.jack.model.vo.WordVO;
 
 import java.util.List;
 
-public interface WordReviewService {
+public interface WordReviewService<T extends WordVO> {
 
-    List<WordVO> getWordVOList();
+    List<T> getWordVOList();
 
 }

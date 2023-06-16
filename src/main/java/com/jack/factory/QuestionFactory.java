@@ -1,13 +1,14 @@
 package com.jack.factory;
 
 import com.jack.model.question.Question;
+import com.jack.model.vo.WordVO;
 
-public interface QuestionFactory {
+public interface QuestionFactory<T extends WordVO> {
 
-    Question createFillDefinition(String word);
+    Question<T> createFillDefinition(T word);
 
-    Question createSelectDefinition(String word);
+    Question<T> createSelectDefinition(T word);
 
-    Question createSelectWord(String definition);
+    Question<T> createSelectWord(T definition);
 
 }

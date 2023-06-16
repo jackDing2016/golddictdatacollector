@@ -1,12 +1,15 @@
-package com.jack.model.question;
+package com.jack.model.question.word;
+
+import com.jack.model.question.Question;
+import com.jack.model.vo.WordVO;
 
 import java.util.List;
 
-public class SelectDefinition extends Question {
+public class WordDefinitionSelection extends Question<WordVO> {
 
     private List<String> optionList;
 
-    public SelectDefinition(String description, List<String> optionList) {
+    public WordDefinitionSelection(String description, List<String> optionList) {
         super(description);
         this.optionList = optionList;
     }

@@ -6,6 +6,16 @@ public class WordVO {
 
     private DefinitionVO definitionVO;
 
+    public WordVO() {
+    }
+
+    public WordVO(String name, String definition) {
+        this.name = name;
+        DefinitionVO definitionVO = new DefinitionVO();
+        definitionVO.setName(definition);
+        this.definitionVO = definitionVO;
+    }
+
     public String getName() {
         return name;
     }

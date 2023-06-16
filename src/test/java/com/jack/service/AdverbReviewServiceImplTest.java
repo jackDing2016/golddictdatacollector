@@ -1,12 +1,12 @@
 package com.jack.service;
 
+import com.jack.model.wordbaseconstruct.AdverbVO;
 import com.jack.model.wordbaseconstruct.PrefixSuffixRootVO;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
-public class PrefixSuffixRootReviewServiceImplTest {
+public class AdverbReviewServiceImplTest {
 
     @Test
     public void test() {
@@ -15,10 +15,10 @@ public class PrefixSuffixRootReviewServiceImplTest {
 
     @Test
     public void getWordVOList() {
-        WordReviewService<PrefixSuffixRootVO> wordReviewService =
-                new PrefixSuffixRootReviewServiceImpl();
-        List<PrefixSuffixRootVO> prefixSuffixRootVOList = wordReviewService.getWordVOList();
-        System.out.println(prefixSuffixRootVOList.size());
+        WordReviewService<AdverbVO> wordReviewService =
+                new AdverbReviewServiceImpl();
+        List<AdverbVO> adverbVOList = wordReviewService.getWordVOList();
+        System.out.println(adverbVOList.size());
     }
 
     @Test

@@ -6,11 +6,11 @@ import java.util.List;
 
 public class PrefixSuffixRootConstants {
 
-    public static List<PrefixSuffixRootVO> prefixVOList;
+    public final static List<PrefixSuffixRootVO> prefixVOList;
 
-    public static List<PrefixSuffixRootVO> suffixVOList;
+    public final static List<PrefixSuffixRootVO> suffixVOList;
 
-    public static List<PrefixSuffixRootVO> rootVOList;
+    public final static List<PrefixSuffixRootVO> rootVOList;
 
     static {
         prefixVOList = List.of(

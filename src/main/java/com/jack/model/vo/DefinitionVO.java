@@ -1,7 +1,11 @@
 package com.jack.model.vo;
 
+import java.util.List;
+
 public class DefinitionVO {
     private String name;
+
+    private List<String> exampleList;
 
     public DefinitionVO() {
     }

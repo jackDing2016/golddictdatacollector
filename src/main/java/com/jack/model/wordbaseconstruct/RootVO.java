@@ -9,6 +9,10 @@ public class RootVO extends WordVO {
     public RootVO() {
     }
 
+    public RootVO(String origin) {
+        this.origin = origin;
+    }
+
     public String getOrigin() {
         return origin;
     }
@@ -17,7 +21,8 @@ public class RootVO extends WordVO {
         this.origin = origin;
     }
 
-    public RootVO(String name, String definition) {
-        super(name, definition);
+    public RootVO(String name, String origin) {
+        super(name);
+        this.origin = origin;
     }
 }

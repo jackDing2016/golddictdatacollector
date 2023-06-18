@@ -6,6 +6,7 @@ import com.jack.model.vo.DefinitionVO;
 import com.jack.model.vo.WordVO;
 import com.jack.model.wordbaseconstruct.AdverbVO;
 import com.jack.model.wordbaseconstruct.PrefixSuffixRootVO;
+import com.jack.model.wordbaseconstruct.RootVO;
 import com.jack.service.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -48,6 +49,7 @@ public class GoldendictAuxiliaryApp {
             System.out.println("d Word definition review.");
             System.out.println("e Prefix,Suffix,Root definition review.");
             System.out.println("f Adverb definition review.");
+            System.out.println("g Root origin review.");
             String input = new BufferedReader(new InputStreamReader(System.in)).readLine();
             if ("a".equals(input)) {
                 System.out.println("Start fill definition, enter exit to exit");
@@ -181,11 +183,60 @@ public class GoldendictAuxiliaryApp {
                                         for (DefinitionVO xx : x.getDefinitionVOList()) {
                                             try {
                                                 Thread.sleep(300);
-                                                System.out.println(index++ + "- " + xx.getName());
+                                                System.out.println(index++ + "-" + xx.getName().trim());
                                             } catch (InterruptedException e) {
                                                 throw new RuntimeException(e);
                                             }
                                         }
+                                        System.out.println();
+                                    }
+                                    Thread.sleep(500);
+                                } catch (RuntimeException e) {
+                                    System.out.println("Definition to be filled");
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
+//                                lineCount.getAndIncrement();
+//                                if (lineCount.get() % 5 == 0) {
+//                                    System.out.println();
+//                                }
+
+                            }
+                    );
+                    System.out.println("Review ended. Enter anything to go on or enter exit to exit");
+                    String inputTwo = new BufferedReader(new InputStreamReader(System.in)).readLine();
+                    if ("exit".equals(inputTwo)) {
+                        System.out.println("Have a good day. Bye Bye");
+                        break out;
+                    }
+                }
+            } else if ("g".equals(input)) {
+                System.out.println("Starting root origin review.");
+                while (true) {
+                    List<RootVO> wordVOList = new RootReviewServiceImpl().getWordVOList();
+                    AtomicInteger lineCount = new AtomicInteger(10);
+                    wordVOList.forEach(
+                            x -> {
+                                System.out.println(x.getName());
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                try {
+                                    if (StringUtils.isEmpty(x.getOrigin())) {
+                                        System.out.println("Origin to be filled");
+                                    } else {
+                                        int index = 1;
+//                                        for (DefinitionVO xx : x.getDefinitionVOList()) {
+//                                            try {
+//                                                Thread.sleep(300);
+//                                                System.out.println(index++ + "-" + xx.getName().trim());
+//                                            } catch (InterruptedException e) {
+//                                                throw new RuntimeException(e);
+//                                            }
+//                                        }
+                                        System.out.println(x.getOrigin());
                                         System.out.println();
                                     }
                                     Thread.sleep(500);

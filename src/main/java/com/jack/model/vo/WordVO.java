@@ -20,6 +20,10 @@ public class WordVO {
         this.definitionVOList = definitionVOList;
     }
 
+    public WordVO(String name) {
+        this.name = name;
+    }
+
     public WordVO(String name, String... definitions) {
         this.name = name;
         if (definitions != null) {

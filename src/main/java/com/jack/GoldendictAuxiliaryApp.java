@@ -65,7 +65,7 @@ public class GoldendictAuxiliaryApp {
                     System.out.println("Your answer is \"" + answer + "\". OK Then we go on to the next one.");
                 }
             } else if ("b".equals(input)) {
-                System.out.println("Start fill definition and save it, enter exit to exit and delete to delete the word");
+                System.out.println("Start fill definition and save it, if there are several definitions use ',' to spilt, enter exit to exit and delete to delete the word");
                 while (true) {
                     String word = new WordServiceImpl().getRandomWord();
                     System.out.println("Please write the definition of word \"" + word + "\"");
@@ -79,10 +79,9 @@ public class GoldendictAuxiliaryApp {
                         System.out.println("The word: \"" + word + "\" deleted.  Then we go on to the next one.");
                     } else {
                         // save it
-                        new DefinitionServiceImpl().fillDefinition(word, answer);
+                        new DefinitionServiceImpl().fillDefinition(word, answer.split(","));
                         System.out.println("Saved the answer: \"" + answer + "\". OK Then we go on to the next one.");
                     }
-
                 }
             } else if ("d".equals(input)) {
                 System.out.println("Starting word definition review.");

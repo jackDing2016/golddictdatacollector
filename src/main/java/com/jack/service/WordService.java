@@ -2,6 +2,9 @@ package com.jack.service;
 
 
 import com.jack.model.Word;
+import com.jack.model.vo.WordVO;
+
+import java.util.List;
 
 public interface WordService {
 
@@ -15,6 +18,10 @@ public interface WordService {
 
     String getRandomWord();
 
+    String getRandomWordWithNoDefinition();
+
     void deleteByWord(String word);
+
+    List<WordVO> findWordVOListByRootNames(String... rootNames);
 
 }

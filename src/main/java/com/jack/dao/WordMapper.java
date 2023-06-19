@@ -105,6 +105,10 @@ public interface WordMapper {
 
     String getRandomWord();
 
+    String getRandomWordWithNoDefinition();
+
     List<WordVO> getRandomWordVOList();
+
+    List<WordVO> getWordVOList(@Param(value = "rootNameList") List<String> rootNameList);
 
 }

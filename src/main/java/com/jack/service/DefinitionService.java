@@ -2,6 +2,6 @@ package com.jack.service;
 
 public interface DefinitionService {
 
-    void fillDefinition(String word, String definition);
+    void fillDefinition(String word, String... definitions);
 
 }

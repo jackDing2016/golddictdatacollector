@@ -1,5 +1,6 @@
 package com.jack.service;
 
+import com.jack.model.vo.WordVO;
 import com.jack.service.HistoryServiceImpl;
 import com.jack.service.WordServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,13 @@ public class WordServiceImplTest {
         WordServiceImpl wordService = new WordServiceImpl();
         Callable<String> callable = wordService::getRandomWord;
         System.out.println(callable.call());
+    }
+
+    @Test
+    public void findWordVOListByRootNames() {
+        WordService wordService = new WordServiceImpl();
+        List<WordVO> wordVOList = wordService.findWordVOListByRootNames("pre", "ment");
+        wordVOList.forEach(x -> System.out.println(x.getName()));
     }
 
 }

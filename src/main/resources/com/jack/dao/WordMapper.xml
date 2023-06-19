@@ -221,6 +221,19 @@
         LIMIT 1
     </select>
 
+    <select id="getRandomWordWithNoDefinition" resultType="java.lang.String">
+        SELECT
+        tw.name
+        FROM
+        tm_word tw
+        where not exists (
+        select 1 from tm_definition td where td.word_id=tw.id
+        )
+        ORDER BY
+        RAND()
+        LIMIT 1
+    </select>
+
 
     <update id="updateByExampleSelective" parameterType="map">
         <!--
@@ -307,9 +320,13 @@
 
     <resultMap id="wordVOResMap" type="com.jack.model.vo.WordVO">
         <result property="name" column="word_name"/>
-        <association property="definitionVO" javaType="com.jack.model.vo.DefinitionVO">
+        <!--        <association property="definitionVO" javaType="com.jack.model.vo.DefinitionVO">-->
+        <!--            <result property="name" column="definition_name"/>-->
+        <!--        </association>-->
+        <collection property="definitionVOList" ofType="com.jack.model.vo.DefinitionVO">
+            <id property="name" column="definition_name"/>
             <result property="name" column="definition_name"/>
-        </association>
+        </collection>
     </resultMap>
 
     <select id="getRandomWordVOList" resultMap="wordVOResMap">
@@ -323,6 +340,19 @@
         ORDER BY
         RAND()
         LIMIT 10
+    </select>
+    <select id="getWordVOList" resultMap="wordVOResMap" parameterType="java.util.List">
+        select tw.name word_name
+        from tm_word tw
+        <where>
+            <if test="rootNameList != null and rootNameList.size() > 0">
+                and
+                <foreach collection="rootNameList" separator="or" open="(" close=")"
+                         item="item">
+                    tw.name like CONCAT('%', #{item}, '%')
+                </foreach>
+            </if>
+        </where>
     </select>
 
 </mapper>

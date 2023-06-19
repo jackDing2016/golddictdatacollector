@@ -4,7 +4,10 @@ import com.jack.client.MybatisClient;
 import com.jack.dao.WordMapper;
 import com.jack.model.Word;
 import com.jack.model.WordExample;
+import com.jack.model.vo.WordVO;
 import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
 
 public class WordServiceImpl implements WordService {
     @Override
@@ -41,7 +44,14 @@ public class WordServiceImpl implements WordService {
     @Override
     public String getRandomWord() {
         SqlSession session = MybatisClient.getSqlSessionFactory().openSession();
-        return session.getMapper(WordMapper.class).getRandomWord();
+        String word = session.getMapper(WordMapper.class).getRandomWord();
+        session.close();
+        return word;
+    }
+
+    @Override
+    public String getRandomWordWithNoDefinition() {
+        return null;
     }
 
     @Override
@@ -52,5 +62,14 @@ public class WordServiceImpl implements WordService {
         session.getMapper(WordMapper.class).deleteByExample(wordExample);
         session.commit();
         session.close();
+    }
+
+    @Override
+    public List<WordVO> findWordVOListByRootNames(String... rootNames) {
+        SqlSession session = MybatisClient.getSqlSessionFactory().openSession();
+        WordMapper wordMapper = session.getMapper(WordMapper.class);
+        List<WordVO> wordVOList = wordMapper.getWordVOList(List.of(rootNames));
+        session.close();
+        return wordVOList;
     }
 }

@@ -49,4 +49,16 @@ public class WordMapperTest {
         System.out.println(wordVOList);
     }
 
+    @Test
+    public void getWordVOList() {
+        SqlSession session =
+                MybatisClient.getSqlSessionFactory().openSession();
+        WordMapper wordMapper = session.getMapper(WordMapper.class);
+        List<WordVO> wordVOList = wordMapper.getWordVOList(List.of("ment", "pre"));
+        session.close();
+        System.out.println(wordVOList);
+
+        wordVOList.forEach(x -> System.out.println(x.getName()));
+    }
+
 }

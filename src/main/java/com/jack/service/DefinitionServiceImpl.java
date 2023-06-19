@@ -9,9 +9,9 @@ import org.apache.ibatis.session.SqlSession;
 public class DefinitionServiceImpl implements DefinitionService {
 
     @Override
-    public void fillDefinition(String word, String definition) {
+    public void fillDefinition(String word, String... definitions) {
 
-        if (StringUtils.isEmpty(word) || StringUtils.isEmpty(definition)) return;
+        if (StringUtils.isEmpty(word) || definitions == null || definitions.length == 0) return;
 
         SqlSession sqlSession =
                 MybatisClient.getSqlSessionFactory().openSession();
@@ -19,11 +19,14 @@ public class DefinitionServiceImpl implements DefinitionService {
         DefinitionMapper definitionMapper =
                 sqlSession.getMapper(DefinitionMapper.class);
 
-        // Now a word could only have one definition, so delete previous data first
-        definitionMapper.deleteByWord(word);
+//        // Now a word could only have one definition, so delete previous data first
+//        definitionMapper.deleteByWord(word);
 
         // insert
-        definitionMapper.setDefinition(word, definition);
+//        definitionMapper.setDefinition(word, definitions);
+        for (String definition : definitions) {
+            definitionMapper.setDefinition(word, definition);
+        }
 
         sqlSession.commit();
         sqlSession.close();

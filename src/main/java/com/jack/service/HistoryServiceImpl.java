@@ -86,7 +86,10 @@ public class HistoryServiceImpl implements HistoryService {
 //            setPivot(list.get(0));
             return null;
         } else {
-            return list.subList(0, list.indexOf(pivot));
+            if (list.contains(pivot)) {
+                return list.subList(0, list.indexOf(pivot));
+            }
+            return null;
         }
     }
 
@@ -158,7 +161,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     private String parseWord(String input) {
-        return input.split(" ")[1];
+        int maxCharacter = 20;
+        return input.substring(input.indexOf(" ") + 1, Math.min(input.length(), maxCharacter));
     }
 
     @Override

@@ -9,6 +9,10 @@ public class GoldendictDataCollectorApp {
 
         new GoldenDictHistoryCollector(new HistoryServiceImpl()).start();
 
+//        String env = System.getProperty("jack_env");
+
+//        System.out.println(env);
+
 //        Runnable goldenDictHistoryCollector = new GoldenDictHistoryCollector(new HistoryServiceImpl());
 //        ExecutorService executorService = Executors.newSingleThreadExecutor();
 //        Future<?> future = executorService.submit(goldenDictHistoryCollector);

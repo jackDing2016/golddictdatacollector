@@ -26,16 +26,16 @@ public class MybatisClient {
 
 
         // read program env
-        String env = System.getenv("jack_env");
+        String env = System.getProperty("jack_env");
+
+        if (StringUtils.isEmpty(env)) {
+            throw new RuntimeException("env is not set.");
+        }
 
         String configureFile = null;
 
-        // default configure file
-        if (StringUtils.isEmpty(env)) configureFile = "database-dev.properties";
-        else {
-            if (Constant.env_dev.equals(env)) configureFile = "database-dev.properties";
-            else configureFile = "database-prod.properties";
-        }
+        if (Constant.env_dev.equals(env)) configureFile = "database-dev.properties";
+        else configureFile = "database-prod.properties";
 
         try {
             dbConfiguration = configurations.properties(new File(configureFile));

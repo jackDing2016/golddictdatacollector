@@ -63,7 +63,7 @@ public class HistoryServiceImplTest {
     @Test
     public void collectHavePivotAndHaveDataInDB() {
         HistoryServiceImpl historyService = new HistoryServiceImpl();
-        historyService.setPivot("tricked");
+        historyService.setPivot("mall");
         historyService.collect();
     }
 

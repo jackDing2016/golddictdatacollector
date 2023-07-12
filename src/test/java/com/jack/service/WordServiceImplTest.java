@@ -36,4 +36,10 @@ public class WordServiceImplTest {
         wordVOList.forEach(x -> System.out.println(x.getName()));
     }
 
+    @Test
+    public void getWordLanguage() {
+        WordService wordService = new WordServiceImpl();
+        System.out.println(wordService.getLanguage("じいｊ").getName());;
+    }
+
 }

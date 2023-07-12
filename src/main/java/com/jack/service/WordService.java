@@ -1,6 +1,7 @@
 package com.jack.service;
 
 
+import com.jack.constatnt.LanguageEnum;
 import com.jack.model.Word;
 import com.jack.model.vo.WordVO;
 
@@ -23,5 +24,7 @@ public interface WordService {
     void deleteByWord(String word);
 
     List<WordVO> findWordVOListByRootNames(String... rootNames);
+
+    LanguageEnum getLanguage(String word);
 
 }

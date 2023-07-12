@@ -1,6 +1,7 @@
 package com.jack.service;
 
 import com.jack.client.MybatisClient;
+import com.jack.constatnt.LanguageEnum;
 import com.jack.dao.WordMapper;
 import com.jack.model.Word;
 import com.jack.model.WordExample;
@@ -18,6 +19,9 @@ public class WordServiceImpl implements WordService {
 
         WordMapper wordMapper = session.getMapper(WordMapper.class);
         wordMapper.insert(word);
+
+
+
 
     }
 
@@ -71,5 +75,28 @@ public class WordServiceImpl implements WordService {
         List<WordVO> wordVOList = wordMapper.getWordVOList(List.of(rootNames));
         session.close();
         return wordVOList;
+    }
+
+    @Override
+    public LanguageEnum getLanguage(String word) {
+//        Character charSequence = word.charAt(0);
+
+        boolean hasJapanese = false;
+//        for (char c : charSequence.toString().toCharArray()) {
+        for (char c : word.toCharArray())
+
+//            if (Character.UnicodeBlock.of(c) != Character.UnicodeBlock.BASIC_LATIN) {
+//                return LanguageEnum.ENGLISH;
+//            }
+            if (Character.UnicodeBlock.of(c) == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+                    || Character.UnicodeBlock.of(c) == Character.UnicodeBlock.HIRAGANA
+                    || Character.UnicodeBlock.of(c) == Character.UnicodeBlock.KATAKANA
+                    || Character.UnicodeBlock.of(c) == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
+                    || Character.UnicodeBlock.of(c) == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
+                    || Character.UnicodeBlock.of(c) == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION) {
+                return LanguageEnum.JAPANESE;
+            }
+
+        return LanguageEnum.ENGLISH;
     }
 }

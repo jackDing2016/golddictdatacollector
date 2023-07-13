@@ -1,5 +1,8 @@
 package com.jack.service;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.jack.configuration.ProjectModuleConfiguration;
 import com.jack.service.HistoryService;
 import com.jack.service.HistoryServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -17,27 +20,32 @@ public class HistoryServiceImplTest {
 
     @Test
     public void readHistory() {
-        HistoryServiceImpl historyService = new HistoryServiceImpl();
+        HistoryServiceImpl historyService = new HistoryServiceImpl(null);
         List<String> list = historyService.readHistory();
         list.forEach(System.out::println);
     }
 
     @Test
     public void collectNoDataInDB() {
-        HistoryServiceImpl historyService = new HistoryServiceImpl();
+
+        Injector injector = Guice.createInjector(new ProjectModuleConfiguration());
+
+//        HistoryServiceImpl historyService = new HistoryServiceImpl(null);
+        HistoryService historyService = injector.getInstance(HistoryService.class);
         historyService.setPivot(null);
         historyService.collect();
     }
 
     @Test
     public void collectHaveDataInDB() {
-        HistoryServiceImpl historyService = new HistoryServiceImpl();
+
+        HistoryServiceImpl historyService = new HistoryServiceImpl(null);
 
     }
 
     @Test
     public void collectNoPivotAndNoDataInDB() {
-        HistoryServiceImpl historyService = new HistoryServiceImpl();
+        HistoryServiceImpl historyService = new HistoryServiceImpl(null);
         historyService.setPivot(null);
         /**
          * We implement  no data in database by deleting data in real db .
@@ -50,7 +58,7 @@ public class HistoryServiceImplTest {
 
     @Test
     public void collectNoPivotAndHaveDataInDB() {
-        HistoryServiceImpl historyService = new HistoryServiceImpl();
+        HistoryServiceImpl historyService = new HistoryServiceImpl(null);
         historyService.setPivot(null);
         historyService.collect();
     }
@@ -62,8 +70,10 @@ public class HistoryServiceImplTest {
 
     @Test
     public void collectHavePivotAndHaveDataInDB() {
-        HistoryServiceImpl historyService = new HistoryServiceImpl();
-        historyService.setPivot("mall");
+//        HistoryServiceImpl historyService = new HistoryServiceImpl(null);
+        Injector injector = Guice.createInjector(new ProjectModuleConfiguration());
+        HistoryService historyService = injector.getInstance(HistoryService.class);
+        historyService.setPivot("sequence");
         historyService.collect();
     }
 
@@ -71,6 +81,13 @@ public class HistoryServiceImplTest {
     public void testSchedule() {
 //        ExecutorService
 
+    }
+
+    @Test
+    public void testGuice() {
+        Injector injector = Guice.createInjector(new ProjectModuleConfiguration());
+        HistoryService historyService = injector.getInstance(HistoryService.class);
+        historyService.testGuice();
     }
 
 }

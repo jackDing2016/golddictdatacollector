@@ -6,7 +6,7 @@
 
     <groupId>com.jack</groupId>
     <artifactId>goldendict-data-collector-prod</artifactId>
-    <version>1.0</version>
+    <version>1.3</version>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
@@ -92,6 +92,12 @@
             <version>2.12.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>7.0.0</version>
+        </dependency>
 
     </dependencies>
 

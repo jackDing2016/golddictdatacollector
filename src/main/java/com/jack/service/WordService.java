@@ -24,4 +24,10 @@ public interface WordService {
 
     List<WordVO> findWordVOListByRootNames(String... rootNames);
 
+    void forTestGuice();
+
+    List<Word> listAll();
+
+    void increaseCount(String word);
+
 }

@@ -27,4 +27,10 @@ public interface WordService {
 
     LanguageEnum getLanguage(String word);
 
+    void forTestGuice();
+
+    List<Word> listAll();
+
+    void increaseCount(String word);
+
 }

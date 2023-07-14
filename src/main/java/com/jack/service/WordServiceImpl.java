@@ -8,6 +8,7 @@ import com.jack.model.WordExample;
 import com.jack.model.vo.WordVO;
 import org.apache.ibatis.session.SqlSession;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class WordServiceImpl implements WordService {
@@ -18,11 +19,12 @@ public class WordServiceImpl implements WordService {
                 MybatisClient.getSqlSessionFactory().openSession();
 
         WordMapper wordMapper = session.getMapper(WordMapper.class);
+
+        word.setCreateTime(LocalDateTime.now());
+        word.setUpdateTime(LocalDateTime.now());
         wordMapper.insert(word);
-
-
-
-
+        session.commit();
+        session.close();
     }
 
     @Override
@@ -98,5 +100,39 @@ public class WordServiceImpl implements WordService {
             }
 
         return LanguageEnum.ENGLISH;
+    }
+
+    @Override
+    public void forTestGuice() {
+        System.out.println("If you see me that means it is successful.");
+    }
+
+    @Override
+    public List<Word> listAll() {
+        SqlSession session =
+                MybatisClient.getSqlSessionFactory().openSession();
+
+        WordMapper wordMapper = session.getMapper(WordMapper.class);
+
+        List<Word> wordList = wordMapper.selectByExample(null);
+        session.close();
+        return wordList;
+    }
+
+    @Override
+    public void increaseCount(String word) {
+
+        SqlSession session =
+                MybatisClient.getSqlSessionFactory().openSession();
+        WordMapper wordMapper = session.getMapper(WordMapper.class);
+
+        WordExample wordExample = new WordExample();
+        wordExample.createCriteria().andNameEqualTo(word);
+        Word wordObj = wordMapper.selectByExample(wordExample).get(0);
+        wordObj.setCount(wordObj.getCount() + 1);
+        wordObj.setUpdateTime(LocalDateTime.now());
+        wordMapper.updateByPrimaryKey(wordObj);
+        session.commit();
+        session.close();
     }
 }

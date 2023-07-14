@@ -1,13 +1,29 @@
 package com.jack;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.jack.concurrent.GoldenDictHistoryCollector;
+import com.jack.configuration.ProjectModuleConfiguration;
+import com.jack.service.HistoryService;
 import com.jack.service.HistoryServiceImpl;
+import org.apache.commons.collections.collection.PredicatedCollection;
 
 public class GoldendictDataCollectorApp {
 
     public static void main(String[] args) throws Exception {
 
-        new GoldenDictHistoryCollector(new HistoryServiceImpl()).start();
+//        new GoldenDictHistoryCollector(new HistoryServiceImpl(null)).start();
+
+        Injector injector = Guice.createInjector(new ProjectModuleConfiguration());
+        Runnable goldenDictHistoryCollector = injector.getInstance(GoldenDictHistoryCollector.class);
+        new Thread(goldenDictHistoryCollector).start();
+
+//        Injector injector = Guice.createInjector(new ProjectModuleConfiguration());
+//        HistoryService historyService = injector.getInstance(HistoryService.class);
+//        historyService.testGuice();
+
+
+
 
 //        String env = System.getProperty("jack_env");
 

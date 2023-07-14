@@ -28,14 +28,20 @@ public class MybatisClient {
         // read program env
         String env = System.getProperty("jack_env");
 
+//        env = "dev"; // for test
+
         if (StringUtils.isEmpty(env)) {
-            throw new RuntimeException("env is not set.");
+            throw new RuntimeException("env is not set.The environment variable name should be jack_env");
         }
 
         String configureFile = null;
 
         if (Constant.env_dev.equals(env)) configureFile = "database-dev.properties";
-        else configureFile = "database-prod.properties";
+        else if (Constant.env_prod.equals(env)) {
+            configureFile = "database-prod.properties";
+        } else {
+            throw new RuntimeException("Invalid environment variable value which the valid values are dev,prod.");
+        }
 
         try {
             dbConfiguration = configurations.properties(new File(configureFile));

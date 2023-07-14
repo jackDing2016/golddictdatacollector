@@ -10,4 +10,8 @@ public interface HistoryService {
 
     void collect();
 
+    void testGuice();
+
+    void setPivot(String value);
+
 }

@@ -1,6 +1,7 @@
 package com.jack.service;
 
 
+import com.google.inject.Inject;
 import com.jack.client.MybatisClient;
 import com.jack.dao.WordMapper;
 import com.jack.model.Word;
@@ -22,6 +23,13 @@ import java.util.stream.Collectors;
 
 
 public class HistoryServiceImpl implements HistoryService {
+
+    private WordService wordService;
+
+    @Inject
+    public HistoryServiceImpl(WordService wordService) {
+        this.wordService = wordService;
+    }
 
     private static String pivot;
 
@@ -60,6 +68,7 @@ public class HistoryServiceImpl implements HistoryService {
         return pivot;
     }
 
+    @Override
     public void setPivot(String value) {
         pivot = value;
     }
@@ -111,12 +120,13 @@ public class HistoryServiceImpl implements HistoryService {
 
 
         // Load all data from database
-        SqlSession session =
-                MybatisClient.getSqlSessionFactory().openSession();
-
-        WordMapper wordMapper = session.getMapper(WordMapper.class);
-
-        List<Word> wordList = wordMapper.selectByExample(null);
+//        SqlSession session =
+//                MybatisClient.getSqlSessionFactory().openSession();
+//
+//        WordMapper wordMapper = session.getMapper(WordMapper.class);
+//
+//        List<Word> wordList = wordMapper.selectByExample(null);
+        List<Word> wordList = wordService.listAll();
 
 
         if (CollectionUtils.isEmpty(wordList)) {
@@ -125,9 +135,10 @@ public class HistoryServiceImpl implements HistoryService {
                 Word word = new Word();
                 word.setName(x);
                 word.setCount(1);
-                word.setCreateTime(LocalDateTime.now());
-                word.setUpdateTime(LocalDateTime.now());
-                wordMapper.insert(word);
+//                word.setCreateTime(LocalDateTime.now());
+//                word.setUpdateTime(LocalDateTime.now());
+//                wordMapper.insert(word);
+                wordService.save(word);
             });
         } else {
 
@@ -140,24 +151,27 @@ public class HistoryServiceImpl implements HistoryService {
                             Word word = new Word();
                             word.setName(x);
                             word.setCount(1);
-                            word.setCreateTime(LocalDateTime.now());
-                            word.setUpdateTime(LocalDateTime.now());
-                            wordMapper.insert(word);
+//                            word.setCreateTime(LocalDateTime.now());
+//                            word.setUpdateTime(LocalDateTime.now());
+//                            wordMapper.insert(word);
+                            wordService.save(word);
                         }
                         // Else if data exists , update by increase count column by 1
                         else {
-                            WordExample wordExample = new WordExample();
-                            wordExample.createCriteria().andNameEqualTo(x);
-                            Word word = wordMapper.selectByExample(wordExample).get(0);
-                            word.setCount(word.getCount() + 1);
-                            word.setUpdateTime(LocalDateTime.now());
-                            wordMapper.updateByPrimaryKey(word);
+//                            WordExample wordExample = new WordExample();
+//                            wordExample.createCriteria().andNameEqualTo(x);
+//                            Word word = wordMapper.selectByExample(wordExample).get(0);
+//                            word.setCount(word.getCount() + 1);
+//                            word.setUpdateTime(LocalDateTime.now());
+//                            wordMapper.updateByPrimaryKey(word);
+
+                            wordService.increaseCount(x);
                         }
                     }
             );
         }
 
-        session.commit();
+//        session.commit();
     }
 
     private String parseWord(String input) {
@@ -173,5 +187,10 @@ public class HistoryServiceImpl implements HistoryService {
         // Write data to database
         write(list);
 
+    }
+
+    @Override
+    public void testGuice() {
+        wordService.forTestGuice();
     }
 }

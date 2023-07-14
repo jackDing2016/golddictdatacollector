@@ -1,5 +1,6 @@
 package com.jack.concurrent;
 
+import com.google.inject.Inject;
 import com.jack.service.HistoryService;
 import com.jack.service.HistoryServiceImpl;
 
@@ -7,6 +8,7 @@ public class GoldenDictHistoryCollector implements Runnable {
 
     private HistoryService historyService;
 
+    @Inject
     public GoldenDictHistoryCollector(HistoryService historyService) {
         this.historyService = historyService;
     }
@@ -26,7 +28,7 @@ public class GoldenDictHistoryCollector implements Runnable {
     }
 
     public void start() {
-        HistoryService historyService1 = new HistoryServiceImpl();
+        HistoryService historyService1 = new HistoryServiceImpl(null);
         GoldenDictHistoryCollector goldenDictHistoryCollector
                 = new GoldenDictHistoryCollector(historyService1);
 

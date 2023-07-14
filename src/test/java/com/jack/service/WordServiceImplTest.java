@@ -17,7 +17,7 @@ public class WordServiceImplTest {
 
     @Test
     public void readHistory() {
-        HistoryServiceImpl historyService = new HistoryServiceImpl();
+        HistoryServiceImpl historyService = new HistoryServiceImpl(null);
         List<String> list = historyService.readHistory();
         list.forEach(System.out::println);
     }

@@ -1,6 +1,7 @@
 package com.jack.service;
 
 import com.jack.client.MybatisClient;
+import com.jack.constatnt.LanguageEnum;
 import com.jack.dao.WordMapper;
 import com.jack.model.vo.WordVO;
 import org.apache.ibatis.session.SqlSession;
@@ -13,7 +14,7 @@ public class RandomWordReviewServiceImpl implements WordReviewService<WordVO>, R
         SqlSession sqlSession =
                 MybatisClient.getSqlSessionFactory().openSession();
         WordMapper wordMapper = sqlSession.getMapper(WordMapper.class);
-        List<WordVO> wordVOList = wordMapper.getRandomWordVOList();
+        List<WordVO> wordVOList = wordMapper.getRandomWordVOList(LanguageEnum.ENGLISH.getCode());
         sqlSession.close();
         return wordVOList;
     }

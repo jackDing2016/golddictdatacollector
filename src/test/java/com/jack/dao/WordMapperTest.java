@@ -1,6 +1,7 @@
 package com.jack.dao;
 
 import com.jack.client.MybatisClient;
+import com.jack.constatnt.LanguageEnum;
 import com.jack.model.Word;
 import com.jack.model.vo.WordVO;
 import org.apache.ibatis.session.SqlSession;
@@ -44,7 +45,7 @@ public class WordMapperTest {
         SqlSession session =
                 MybatisClient.getSqlSessionFactory().openSession();
         WordMapper wordMapper = session.getMapper(WordMapper.class);
-        List<WordVO> wordVOList = wordMapper.getRandomWordVOList();
+        List<WordVO> wordVOList = wordMapper.getRandomWordVOList(LanguageEnum.ENGLISH.getCode());
         session.close();
         System.out.println(wordVOList);
     }

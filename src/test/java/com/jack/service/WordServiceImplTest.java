@@ -1,10 +1,17 @@
 package com.jack.service;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.jack.configuration.ProjectModuleConfiguration;
+import com.jack.constatnt.LanguageEnum;
+import com.jack.model.Word;
 import com.jack.model.vo.WordVO;
 import com.jack.service.HistoryServiceImpl;
 import com.jack.service.WordServiceImpl;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -30,6 +37,13 @@ public class WordServiceImplTest {
     }
 
     @Test
+    public void getRandomWordByLanguage() {
+        Injector injector = Guice.createInjector(new ProjectModuleConfiguration());
+        WordService wordService = injector.getInstance(WordService.class);
+        System.out.println(wordService.getRandomWord(LanguageEnum.JAPANESE));
+    }
+
+    @Test
     public void findWordVOListByRootNames() {
         WordService wordService = new WordServiceImpl();
         List<WordVO> wordVOList = wordService.findWordVOListByRootNames("pre", "ment");
@@ -39,7 +53,20 @@ public class WordServiceImplTest {
     @Test
     public void getWordLanguage() {
         WordService wordService = new WordServiceImpl();
-        System.out.println(wordService.getLanguage("じいｊ").getName());;
+        System.out.println(wordService.getLanguage("じいｊ").getName());
+    }
+
+    @Test
+    public void saveWord() {
+        Injector injector = Guice.createInjector(new ProjectModuleConfiguration());
+        WordService wordService = injector.getInstance(WordService.class);
+        Word word = new Word();
+        word.setName("しみませ");
+        word.setUpdateTime(LocalDateTime.now());
+        word.setCreateTime(LocalDateTime.now());
+        word.setCount(1);
+        word.setWordLanguage(LanguageEnum.JAPANESE.getCode());
+        wordService.save(word);
     }
 
 }

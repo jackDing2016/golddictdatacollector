@@ -20,6 +20,17 @@ public class WordServiceImpl implements WordService {
 
         WordMapper wordMapper = session.getMapper(WordMapper.class);
 
+        // check language
+        try {
+            LanguageEnum languageEnum = getLanguage(word.getName());
+            if (languageEnum != null) {
+                word.setWordLanguage(languageEnum.getCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to get the word language.");
+        }
+
         word.setCreateTime(LocalDateTime.now());
         word.setUpdateTime(LocalDateTime.now());
         wordMapper.insert(word);
@@ -50,7 +61,15 @@ public class WordServiceImpl implements WordService {
     @Override
     public String getRandomWord() {
         SqlSession session = MybatisClient.getSqlSessionFactory().openSession();
-        String word = session.getMapper(WordMapper.class).getRandomWord();
+        String word = session.getMapper(WordMapper.class).getRandomWord(LanguageEnum.ENGLISH.getCode());
+        session.close();
+        return word;
+    }
+
+    @Override
+    public String getRandomWord(LanguageEnum languageEnum) {
+        SqlSession session = MybatisClient.getSqlSessionFactory().openSession();
+        String word = session.getMapper(WordMapper.class).getRandomWord(languageEnum.getCode());
         session.close();
         return word;
     }

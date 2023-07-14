@@ -19,6 +19,8 @@ public interface WordService {
 
     String getRandomWord();
 
+    String getRandomWord(LanguageEnum languageEnum);
+
     String getRandomWordWithNoDefinition();
 
     void deleteByWord(String word);

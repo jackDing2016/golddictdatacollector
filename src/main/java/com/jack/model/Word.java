@@ -173,6 +173,16 @@ public class Word {
 
     private LocalDateTime updateTime;
 
+    private Integer wordLanguage;
+
+    public Integer getWordLanguage() {
+        return wordLanguage;
+    }
+
+    public void setWordLanguage(Integer wordLanguage) {
+        this.wordLanguage = wordLanguage;
+    }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }

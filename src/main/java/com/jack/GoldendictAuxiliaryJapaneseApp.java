@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class GoldendictAuxiliaryApp {
+public class GoldendictAuxiliaryJapaneseApp {
 
     public static void main(String[] args) throws Exception {
 

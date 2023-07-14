@@ -1,6 +1,7 @@
 package com.jack.factory;
 
 import com.jack.client.MybatisClient;
+import com.jack.constatnt.LanguageEnum;
 import com.jack.dao.WordMapper;
 import com.jack.model.question.word.WordFillDefinition;
 import com.jack.model.question.Question;
@@ -41,7 +42,7 @@ public class RandomQuestionFactory implements QuestionFactory<WordVO> {
                 MybatisClient.getSqlSessionFactory().openSession();
         WordMapper wordMapper = session.getMapper(WordMapper.class);
 
-        String randomWord = wordMapper.getRandomWord();
+        String randomWord = wordMapper.getRandomWord(LanguageEnum.ENGLISH.getCode());
 
         session.close();
 

@@ -103,11 +103,11 @@ public interface WordMapper {
 
     Word selectTest();
 
-    String getRandomWord();
+    String getRandomWord(@Param("wordLanguage") Integer wordLanguage);
 
     String getRandomWordWithNoDefinition();
 
-    List<WordVO> getRandomWordVOList();
+    List<WordVO> getRandomWordVOList(@Param("wordLanguage") Integer wordLanguage);
 
     List<WordVO> getWordVOList(@Param(value = "rootNameList") List<String> rootNameList);
 
